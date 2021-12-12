@@ -26,6 +26,9 @@ class PatientController extends Controller
         ]);
 
         $attr['vaccine_id'] = $vaccine->id;
+        if (request()->file('image_ktp')) {
+            $attr['image_ktp'] = request()->file('image_ktp')->store('img-ktp-patient');
+        }
         patient::create($attr);
         return redirect()->back()->with('success', 'Success register patient.');
     }
@@ -39,12 +42,21 @@ class PatientController extends Controller
             'no_hp' => 'required',
         ]);
 
+        if (request()->file('image_ktp')) {
+            \Storage::delete($patient->image_ktp);
+            $updateimg = request()->file('image_ktp')->store('img-ktp-patient');
+        } else {
+            $updateimg = $patient->image_ktp;
+        }
+
+        $attr['image_ktp'] = $updateimg;
         $patient->update($attr);
         return redirect()->back()->with('success', 'Success update patient.');
     }
 
     public function destroy(patient $patient)
     {
+        \Storage::delete($patient->image_ktp);
         $patient->delete();
         return redirect()->back()->with('success', 'Success delete patient.');
     }

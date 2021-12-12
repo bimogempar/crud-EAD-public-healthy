@@ -19,6 +19,7 @@
             <tr>
                 <th class="col-md-1">#</th>
                 <th class="col">Name</th>
+                <th class="col">Description</th>
                 <th class="col-md-3">Image</th>
                 <th class="col-md-3">Price</th>
                 <th class="col-md-2">Action</th>
@@ -29,7 +30,8 @@
             <tr>
                 <th>{{$vaccine->id}}</th>
                 <td>{{$vaccine->name}}</td>
-                <td>{{$vaccine->image}}</td>
+                <td>{{$vaccine->description}}</td>
+                <td><img src="/storage/{{$vaccine->image}}" width="100px" alt=""></td>
                 <td>{{$vaccine->price}}</td>
                 <td>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#editvaccine{{$vaccine->id}}" class="btn btn-warning mr-5">Edit</button>
@@ -53,7 +55,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Add Vaccine</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/vaccine" method="post">
+                <form action="/vaccine" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <label for="basic-url" class="form-label">Vaccine Name</label>
@@ -96,7 +98,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Edit Vaccine</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/vaccine/update/{{$vaccine->id}}" method="post">
+                <form action="/vaccine/update/{{$vaccine->id}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
                     <div class="modal-body">
@@ -117,6 +119,11 @@
                         </div>
 
                         <label for="basic-url" class="form-label">Image</label>
+                        @isset($vaccine->image)
+                        <div class="p-0 mb-3">
+                            <img src="/storage/{{$vaccine->image}}" width="200px" alt="">
+                        </div>
+                        @endisset
                         <div class="input-group mb-3">
                             <input type="file" class="form-control" name="image">
                         </div>

@@ -21,8 +21,10 @@ class VaccineController extends Controller
             'description' => 'required'
         ]);
 
+        if (request()->file('image')) {
+            $attr['image'] = request()->file('image')->store('img-vaccine');
+        }
         vaccine::create($attr);
-
         return redirect()->back()->with('success', 'Success add vaccine.');
     }
 
@@ -34,12 +36,22 @@ class VaccineController extends Controller
             'description' => 'required'
         ]);
 
+        if (request()->file('image')) {
+            \Storage::delete($vaccine->image);
+            $updateimg = request()->file('image')->store('img-vaccine');
+        } else {
+            $updateimg = $vaccine->image;
+        }
+
+        $attr['image'] = $updateimg;
         $vaccine->update($attr);
         return redirect()->back()->with('success', 'Success update vaccine.');
     }
 
     public function destroy(vaccine $vaccine)
     {
+        \Storage::delete($vaccine->image);
+        $vaccine->patient()->delete();
         $vaccine->delete();
         return redirect()->back()->with('success', 'Success delete vaccine.');
     }
