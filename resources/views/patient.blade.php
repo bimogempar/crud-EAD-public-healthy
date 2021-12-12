@@ -12,7 +12,7 @@
         @foreach ($vaccines as $vaccine)
         <div class="col-md-4 justify-content-center">
             <div class="card">
-                {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                <img src="/storage/{{$vaccine->image}}" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{$vaccine->name}}</h5>
                     <p class="text-secondary">{{$vaccine->price}}</p>
