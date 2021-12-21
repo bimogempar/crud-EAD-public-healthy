@@ -31,7 +31,7 @@
                 <th>{{$vaccine->id}}</th>
                 <td>{{$vaccine->name}}</td>
                 <td>{{$vaccine->description}}</td>
-                <td><img src="/storage/{{$vaccine->image}}" width="100px" alt=""></td>
+                <td><img src="/storage/{{$vaccine->image}}" width="200px" alt=""></td>
                 <td>@currency($vaccine->price)</td>
                 <td>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#editvaccine{{$vaccine->id}}" class="btn btn-warning mr-5">Edit</button>

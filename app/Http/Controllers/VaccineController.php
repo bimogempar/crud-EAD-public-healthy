@@ -16,9 +16,10 @@ class VaccineController extends Controller
     public function store()
     {
         $attr = request()->validate([
-            'name' => 'required',
+            'name' => 'required|max:40',
             'price' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => 'mimes:jpeg,png,jpeg|max:1024'
         ]);
 
         $price_explode = $attr['price'] = explode(".", request('price'));
@@ -34,9 +35,10 @@ class VaccineController extends Controller
     public function update(vaccine $vaccine)
     {
         $attr = request()->validate([
-            'name' => 'required',
+            'name' => 'required|max:40',
             'price' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => 'mimes:jpeg,png,jpeg|max:1024'
         ]);
 
         $price_explode = $attr['price'] = explode(".", request('price'));

@@ -45,7 +45,7 @@
 
                             <label for="basic-url" class="form-label">NIK</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="nik" name="nik" pattern="[0-9]+" maxlength="16" class="form-control">
+                                <input type="text" id="nik" name="nik" maxlength="16" class="form-control">
                             </div>
 
                             <label for="basic-url" class="form-label">Alamat</label>
@@ -60,7 +60,7 @@
 
                             <label for="basic-url" class="form-label">No HP</label>
                             <div class="input-group mb-3">
-                                <input type="text" name="no_hp" class="form-control" id="">
+                                <input type="text" name="no_hp" maxlength="13" class="form-control" id="no_hp">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -139,7 +139,7 @@
 
                                 <label for="basic-url" class="form-label">NIK</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" class="form-control" name="nik" value="{{$patient->nik}}">
+                                    <input type="text" id="nik" name="nik" maxlength="16" class="form-control" value="{{$patient->nik}}">
                                 </div>
 
                                 <label for="basic-url" class="form-label">Alamat</label>
@@ -159,7 +159,7 @@
 
                                 <label for="basic-url" class="form-label">No HP</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" class="form-control" name="no_hp" value="{{$patient->no_hp}}">
+                                    <input type="text" name="no_hp" maxlength="13" class="form-control" id="no_hp" value="{{$patient->no_hp}}">
                                 </div>
                             </div>
                             <div class="modal-footer">

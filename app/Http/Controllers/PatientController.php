@@ -19,13 +19,12 @@ class PatientController extends Controller
     public function store(vaccine $vaccine)
     {
         $attr = request()->validate([
-            'name' => 'required',
-            'nik' => 'required',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u',
+            'nik' => 'required|numeric|digits:16',
             'alamat' => 'required',
-            'no_hp' => 'required',
+            'no_hp' => 'required|numeric|digits_between:10,13',
+            'image_ktp' => 'mimes:jpeg,png,jpeg|max:1024',
         ]);
-
-        dd($attr['no_hp'] = request('no_hp'));
 
         $attr['vaccine_id'] = $vaccine->id;
         if (request()->file('image_ktp')) {
@@ -38,10 +37,11 @@ class PatientController extends Controller
     public function update(patient $patient)
     {
         $attr = request()->validate([
-            'name' => 'required',
-            'nik' => 'required',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u',
+            'nik' => 'required|numeric|digits:16',
             'alamat' => 'required',
-            'no_hp' => 'required',
+            'no_hp' => 'required|numeric|digits_between:10,13',
+            'image_ktp' => 'mimes:jpeg,png,jpeg|max:1024',
         ]);
 
         if (request()->file('image_ktp')) {
