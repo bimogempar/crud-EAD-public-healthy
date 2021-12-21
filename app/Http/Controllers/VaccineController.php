@@ -17,9 +17,12 @@ class VaccineController extends Controller
     {
         $attr = request()->validate([
             'name' => 'required',
-            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'price' => 'required',
             'description' => 'required'
         ]);
+
+        $price_explode = $attr['price'] = explode(".", request('price'));
+        $attr['price'] = implode($price_explode);
 
         if (request()->file('image')) {
             $attr['image'] = request()->file('image')->store('img-vaccine');
@@ -32,9 +35,12 @@ class VaccineController extends Controller
     {
         $attr = request()->validate([
             'name' => 'required',
-            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'price' => 'required',
             'description' => 'required'
         ]);
+
+        $price_explode = $attr['price'] = explode(".", request('price'));
+        $attr['price'] = implode($price_explode);
 
         if (request()->file('image')) {
             \Storage::delete($vaccine->image);

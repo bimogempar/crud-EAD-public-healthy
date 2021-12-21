@@ -25,6 +25,8 @@ class PatientController extends Controller
             'no_hp' => 'required',
         ]);
 
+        dd($attr['no_hp'] = request('no_hp'));
+
         $attr['vaccine_id'] = $vaccine->id;
         if (request()->file('image_ktp')) {
             $attr['image_ktp'] = request()->file('image_ktp')->store('img-ktp-patient');

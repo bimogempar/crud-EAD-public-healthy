@@ -32,7 +32,7 @@
                 <td>{{$vaccine->name}}</td>
                 <td>{{$vaccine->description}}</td>
                 <td><img src="/storage/{{$vaccine->image}}" width="100px" alt=""></td>
-                <td>{{$vaccine->price}}</td>
+                <td>@currency($vaccine->price)</td>
                 <td>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#editvaccine{{$vaccine->id}}" class="btn btn-warning mr-5">Edit</button>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#deletevaccine{{$vaccine->id}}" class="btn btn-danger">Delete</button>
@@ -66,7 +66,7 @@
                         <label for="basic-url" class="form-label">Price</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text">Rp</span>
-                            <input type="number" class="form-control" name="price">
+                            <input class="input-currency form-control" name="price" type="text" type-currency="IDR" />
                         </div>
 
                         <label for="basic-url" class="form-label">Description</label>
@@ -110,7 +110,7 @@
                         <label for="basic-url" class="form-label">Price</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text">Rp</span>
-                            <input type="number" class="form-control" name="price" value="{{$vaccine->price}}">
+                            <input class="input-currency form-control" name="price" type="text" type-currency="IDR" value="{{$vaccine->price}}" />
                         </div>
 
                         <label for="basic-url" class="form-label">Description</label>
@@ -163,5 +163,28 @@
     </div>
     @endforeach
 </div>
+
+<script>
+    // input auto format currency
+    document.querySelectorAll('input[type-currency="IDR"]').forEach((element) => {
+        element.addEventListener('keyup', function(e) {
+            let cursorPostion = this.selectionStart;
+            let value = parseInt(this.value.replace(/[^,\d]/g, ''));
+            let originalLenght = this.value.length;
+            if (isNaN(value)) {
+                this.value = "";
+            } else {
+                this.value = value.toLocaleString('id-ID', {
+                    currency: 'IDR',
+                    // style: 'currency',
+                    minimumFractionDigits: 0
+                });
+                cursorPostion = this.value.length - originalLenght + cursorPostion;
+                this.setSelectionRange(cursorPostion, cursorPostion);
+            }
+        });
+    });
+
+</script>
 
 @endsection

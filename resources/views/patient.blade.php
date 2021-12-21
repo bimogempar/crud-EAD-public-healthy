@@ -15,7 +15,7 @@
                 <img src="/storage/{{$vaccine->image}}" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{$vaccine->name}}</h5>
-                    <p class="text-secondary">{{$vaccine->price}}</p>
+                    <p class="text-secondary">@currency($vaccine->price)</p>
                     <p class="card-text">{{$vaccine->description}}</p>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#registerpatient{{$vaccine->id}}" class="btn btn-primary">Vaccine Now</button>
                 </div>
@@ -45,7 +45,7 @@
 
                             <label for="basic-url" class="form-label">NIK</label>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" name="nik">
+                                <input type="text" id="nik" name="nik" pattern="[0-9]+" maxlength="16" class="form-control">
                             </div>
 
                             <label for="basic-url" class="form-label">Alamat</label>
@@ -60,7 +60,7 @@
 
                             <label for="basic-url" class="form-label">No HP</label>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" name="no_hp">
+                                <input type="text" name="no_hp" class="form-control" id="">
                             </div>
                         </div>
                         <div class="modal-footer">
