@@ -20,7 +20,7 @@ class PatientController extends Controller
     {
         $attr = request()->validate([
             'name' => 'required|regex:/^[\pL\s\-]+$/u',
-            'nik' => 'required|numeric|digits:16',
+            'nik' => 'required|numeric|digits:16|unique',
             'alamat' => 'required',
             'no_hp' => 'required|numeric|digits_between:10,13',
             'image_ktp' => 'mimes:jpeg,png,jpeg|max:1024',
@@ -38,7 +38,7 @@ class PatientController extends Controller
     {
         $attr = request()->validate([
             'name' => 'required|regex:/^[\pL\s\-]+$/u',
-            'nik' => 'required|numeric|digits:16',
+            'nik' => 'required|numeric|digits:16|unique',
             'alamat' => 'required',
             'no_hp' => 'required|numeric|digits_between:10,13',
             'image_ktp' => 'mimes:jpeg,png,jpeg|max:1024',
